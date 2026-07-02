@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Testing Automation Report Dashboard</title>
+  <style>
+    /* Modern CSS Reset & Variable Setup */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #334155;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header Panel */
+    .header-card {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 24px;
+    }
+
+    .header-card h1 {
+      font-size: 24px;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    .header-card p {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    /* File Input Styling */
+    .file-upload-wrapper {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-upload {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #2563eb;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .btn-upload:hover {
+      background-color: #1d4ed8;
+    }
+
+    #file-input {
+      display: none;
+    }
+
+    #file-status {
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+      background: #f1f5f9;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    /* Toolbar Filter Bar */
+    .toolbar {
+      background: white;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 280px;
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    .category-select {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: white;
+      font-size: 14px;
+    }
+
+    /* Matrix Cards Layout */
+    .matrix-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .matrix-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: #f8fafc;
+      padding: 12px 24px;
+      border-b: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .case-no {
+      font-weight: 700;
+      background: #e2e8f0;
+      color: #334155;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    /* Badges */
+    .badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+    }
+
+    .badge-normal { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+    .badge-abnormal { background: #fff7ed; color: #9a3412; border-color: #ffedd5; }
+    .badge-high { background: #fef2f2; color: #991b1b; border-color: #fee2e2; }
+    .badge-medium { background: #fefce8; color: #854d0e; border-color: #fef08a; }
+
+    /* Main Grid Structure */
+    .card-body {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .card-body {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .column-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .right-section {
+      background: #fdfdfd;
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px dashed #cbd5e1;
+    }
+
+    .field-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .scenario-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .precondition-box {
+      background: #f8fafc;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #f1f5f9;
+      font-size: 13px;
+      color: #475569;
+    }
+
+    .data-box {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 12px;
+      word-break: break-all;
+    }
+
+    .steps-box {
+      background: white;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      font-size: 13px;
+      color: #334155;
+      white-space: pre-line;
+    }
+
+    .expected-box {
+      background: #f0fdf4;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #dcfce7;
+      font-size: 13px;
+      color: #166534;
+      font-weight: 500;
+      white-space: pre-line;
+    }
+
+    /* Empty Upload Layout */
+    .empty-state {
+      background: white;
+      border: 2px dashed #cbd5e1;
+      border-radius: 16px;
+      padding: 60px;
+      text-align: center;
+      color: #94a3b8;
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-card">
+      <h1>AI Testing Automation Report Dashboard</h1>
+      <p>Upload a generated test case JSON file to visualize the layout matrix instantly without installation.</p>
+      
+      <div class="file-upload-wrapper">
+        <label class="btn-upload" for="file-input">📁 Select JSON Report</label>
+        <input type="file" id="file-input" accept=".json">
+        <span id="file-status" style="display: none;"></span>
+      </div>
+    </div>
+
+    <div id="dashboard-controls" style="display: none;">
+      <div class="toolbar">
+        <input type="text" id="search-bar" class="search-input" placeholder="Search matrix by keyword, No., or error codes...">
+        
+        <div class="filter-group">
+          <span>Filter Category:</span>
+          <select id="category-filter" class="category-select">
+            <option value="All">All Categories</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="matrix-output" class="matrix-container"></div>
+    </div>
+
+    <div id="empty-view" class="empty-state">
+      <div class="empty-state-icon">📋</div>
+      <h3>No execution file loaded yet</h3>
+      <p style="font-size: 13px; margin-top: 4px;">Click the upload button above to choose your parsed JSON array.</p>
+    </div>
+  </div>
+
+  <script>
+    // State storage variables
+    let rawTestCases = [];
+
+    // Selectors
+    const fileInput = document.getElementById('file-input');
+    const fileStatus = document.getElementById('file-status');
+    const dashboardControls = document.getElementById('dashboard-controls');
+    const emptyView = document.getElementById('empty-view');
+    const matrixOutput = document.getElementById('matrix-output');
+    const searchBar = document.getElementById('search-bar');
+    const categoryFilter = document.getElementById('category-filter');
+
+    // Handle File Upload Reader pipeline
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      fileStatus.textContent = `Loaded: ${file.name}`;
+      fileStatus.style.display = 'inline-block';
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const parsedJson = JSON.parse(event.target.result);
+          rawTestCases = parsedJson.test_cases || [];
+          
+          if(rawTestCases.length > 0) {
+            setupCategoryDropdown();
+            renderMatrix();
+            emptyView.style.display = 'none';
+            dashboardControls.style.display = 'block';
+          } else {
+            alert("No test_cases list found in this JSON schema setup.");
+          }
+        } catch (err) {
+          alert("Invalid file structure. Make sure it's valid JSON.");
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    // Populate Category Filtering choices dynamically
+    function setupCategoryDropdown() {
+      const categories = ['All', ...new Set(rawTestCases.map(item => item.Category))];
+      categoryFilter.innerHTML = '';
+      categories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        option.textContent = cat === 'All' ? 'All Categories' : cat;
+        categoryFilter.appendChild(option);
+      });
+    }
+
+    // Grid Matrix Rendering logic engine
+    function renderMatrix() {
+      const query = searchBar.value.toLowerCase();
+      const selectedCategory = categoryFilter.value;
+
+      matrixOutput.innerHTML = '';
+
+      const filteredItems = rawTestCases.filter(item => {
+        const matchSearch = item.TextItem.toLowerCase().includes(query) || 
+                            item.ExpectedResult.toLowerCase().includes(query) ||
+                            String(item.No).includes(query);
+        const matchCategory = selectedCategory === 'All' || item.Category === selectedCategory;
+        return matchSearch && matchCategory;
+      });
+
+      if (filteredItems.length === 0) {
+        matrixOutput.innerHTML = `<div style="text-align:center; padding: 40px; color:#94a3b8; background:white; border-radius:12px; border: 1px solid #e2e8f0;">No matching items found.</div>`;
+        return;
+      }
+
+      filteredItems.forEach(item => {
+        const isAbnormal = item.Category.includes('異常系');
+        const isHigh = item.Priority === 'High';
+
+        const categoryClass = isAbnormal ? 'badge-abnormal' : 'badge-normal';
+        const priorityClass = isHigh ? 'badge-high' : 'badge-medium';
+
+        const cardElement = document.createElement('div');
+        cardElement.className = 'matrix-card';
+        cardElement.innerHTML = `
+          <div class="card-header">
+            <div class="header-left">
+              <span class="case-no">No. ${item.No}</span>
+              <span class="badge ${categoryClass}">${item.Category}</span>
+            </div>
+            <span class="badge ${priorityClass}">${item.Priority} Priority</span>
+          </div>
+          <div class="card-body">
+            <div class="column-section">
+              <div>
+                <div class="field-title">Test Item / Scenario</div>
+                <div class="scenario-text">${item.TextItem}</div>
+              </div>
+              <div>
+                <div class="field-title">Preconditions</div>
+                <div class="precondition-box">${item.Precondition}</div>
+              </div>
+              <div>
+                <div class="field-title">Input Test Data</div>
+                <div class="data-box">${item.InputData}</div>
+              </div>
+            </div>
+            <div class="column-section right-section">
+              <div>
+                <div class="field-title" style="color: #64748b;">Steps to Reproduce</div>
+                <div class="steps-box">${item.Steps}</div>
+              </div>
+              <div>
+                <div class="field-title" style="color: #166534;">Expected Operational Result</div>
+                <div class="expected-box">${item.ExpectedResult}</div>
+              </div>
+            </div>
+          </div>
+        `;
+        matrixOutput.appendChild(cardElement);
+      });
+    }
+
+    // Listener inputs for live tracking
+    searchBar.addEventListener('input', renderMatrix);
+    categoryFilter.addEventListener('change', renderMatrix);
+  </script>
+</body>
+</html>
