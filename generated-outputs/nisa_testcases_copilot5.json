@@ -1,0 +1,74 @@
+﻿{
+  "test_cases": [
+    {
+      "No": 1,
+      "Category": "結合テスト / 異常系",
+      "TextItem": "[タブレット] 当日買付エラー(先日付可)",
+      "Precondition": "会社:先日付可; 口座:見込",
+      "Steps": "1. 開設申請(当日,見込)\n2. 買付で注文日=当日",
+      "InputData": "注文種別:買付; 注文日:当日",
+      "ExpectedResult": "メッセ14840表示,受付不可,伝票未作成",
+      "Priority": "High"
+    },
+    {
+      "No": 2,
+      "Category": "結合テスト / 異常系",
+      "TextItem": "[FR] 当日応募エラー(先日付可)",
+      "Precondition": "会社:先日付可; 口座:見込",
+      "Steps": "1. FRで応募画面\n2. 注文日=当日で実行",
+      "InputData": "注文種別:応募; 注文日:当日",
+      "ExpectedResult": "メッセ14840表示,受付不可,伝票未作成",
+      "Priority": "High"
+    },
+    {
+      "No": 3,
+      "Category": "結合テスト / 異常系",
+      "TextItem": "[タブレット] 当日定時定額受付不可(先日付不可)",
+      "Precondition": "会社:先日付不可; 口座:見込",
+      "Steps": "1. 定時定額画面\n2. 注文日=当日で申請",
+      "InputData": "注文種別:定時定額; 注文日:当日",
+      "ExpectedResult": "メッセ14850表示,受付不可",
+      "Priority": "Medium"
+    },
+    {
+      "No": 4,
+      "Category": "結合テスト / 正常系",
+      "TextItem": "[FR] 先日付(翌営業日)注文保存(先日付可)",
+      "Precondition": "会社:先日付可; 口座:見込",
+      "Steps": "1. 先日付注文画面\n2. 注文日=翌営業日で実行",
+      "InputData": "注文種別:買付/応募/定時定額; 注文日:翌営業日",
+      "ExpectedResult": "注文保存,口座に紐付,進捗一覧で表示",
+      "Priority": "High"
+    },
+    {
+      "No": 5,
+      "Category": "結合テスト / 異常系",
+      "TextItem": "[検印] 開設却下時に紐付注文取消",
+      "Precondition": "開設と先日付注文が紐付済(見込)",
+      "Steps": "1. 検印で開設却下\n2. 進捗一覧で確認",
+      "InputData": "操作:検印却下",
+      "ExpectedResult": "口座未開設化,紐付注文取消/却下,メッセ14860表示可",
+      "Priority": "High"
+    },
+    {
+      "No": 6,
+      "Category": "バッチテスト / 異常系",
+      "TextItem": "[夜間バッチ] LISA未連携で注文取消",
+      "Precondition": "開設と先日付注文が紐付済(見込)",
+      "Steps": "1. 夜間バッチで連携失敗を模拟\n2. 進捗一覧で確認",
+      "InputData": "バッチ: LISA連携失敗",
+      "ExpectedResult": "口座未開設化,紐付注文バッチ取消,進捗にバッチ失効表示",
+      "Priority": "High"
+    },
+    {
+      "No": 7,
+      "Category": "画面表示 / 確認",
+      "TextItem": "[画面] バッチ失効フィルタで取消表示",
+      "Precondition": "夜間で取消発生済",
+      "Steps": "1. 進捗一覧を開く\n2. バッチ失効で検索",
+      "InputData": "フィルタ:バッチ失効",
+      "ExpectedResult": "取消された先日付注文が一覧/詳細に表示",
+      "Priority": "Medium"
+    }
+  ]
+}

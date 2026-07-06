@@ -1,0 +1,264 @@
+﻿{
+    "total_cases": 24,
+    "variables": {
+        "Channel": [
+            "タブレット",
+            "FR"
+        ],
+        "OrderDate": [
+            "当日",
+            "翌営業日"
+        ],
+        "CompanyOption": [
+            "先日付受付可",
+            "先日付受付不可"
+        ],
+        "OrderType": [
+            "買付",
+            "応募",
+            "定時定額"
+        ]
+    },
+    "test_cases": [
+        {
+            "ExpectedResult": "メッセ14840表示,受付不可",
+            "No": 1,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:タブレット;注文種別:買付;注文日:当日;会社:先日付受付可",
+            "TextItem": "[タブレット] 買付 当日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "注文保存,口座に紐付",
+            "No": 2,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:タブレット;注文種別:買付;注文日:翌営業日;会社:先日付受付可",
+            "TextItem": "[タブレット] 買付 翌営業日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 3,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:タブレット;注文種別:買付;注文日:当日;会社:先日付受付不可",
+            "TextItem": "[タブレット] 買付 当日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 4,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:タブレット;注文種別:買付;注文日:翌営業日;会社:先日付受付不可",
+            "TextItem": "[タブレット] 買付 翌営業日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14840表示,受付不可",
+            "No": 5,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:タブレット;注文種別:応募;注文日:当日;会社:先日付受付可",
+            "TextItem": "[タブレット] 応募 当日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "注文保存,口座に紐付",
+            "No": 6,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:タブレット;注文種別:応募;注文日:翌営業日;会社:先日付受付可",
+            "TextItem": "[タブレット] 応募 翌営業日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 7,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:タブレット;注文種別:応募;注文日:当日;会社:先日付受付不可",
+            "TextItem": "[タブレット] 応募 当日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 8,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:タブレット;注文種別:応募;注文日:翌営業日;会社:先日付受付不可",
+            "TextItem": "[タブレット] 応募 翌営業日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14840表示,受付不可",
+            "No": 9,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "Medium",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:タブレット;注文種別:定時定額;注文日:当日;会社:先日付受付可",
+            "TextItem": "[タブレット] 定時定額 当日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "注文保存,口座に紐付",
+            "No": 10,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "Medium",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:タブレット;注文種別:定時定額;注文日:翌営業日;会社:先日付受付可",
+            "TextItem": "[タブレット] 定時定額 翌営業日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 11,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "Medium",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:タブレット;注文種別:定時定額;注文日:当日;会社:先日付受付不可",
+            "TextItem": "[タブレット] 定時定額 当日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 12,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "Medium",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:タブレット;注文種別:定時定額;注文日:翌営業日;会社:先日付受付不可",
+            "TextItem": "[タブレット] 定時定額 翌営業日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14840表示,受付不可",
+            "No": 13,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:FR;注文種別:買付;注文日:当日;会社:先日付受付可",
+            "TextItem": "[FR] 買付 当日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "注文保存,口座に紐付",
+            "No": 14,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:FR;注文種別:買付;注文日:翌営業日;会社:先日付受付可",
+            "TextItem": "[FR] 買付 翌営業日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 15,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:FR;注文種別:買付;注文日:当日;会社:先日付受付不可",
+            "TextItem": "[FR] 買付 当日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 16,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:FR;注文種別:買付;注文日:翌営業日;会社:先日付受付不可",
+            "TextItem": "[FR] 買付 翌営業日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14840表示,受付不可",
+            "No": 17,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:FR;注文種別:応募;注文日:当日;会社:先日付受付可",
+            "TextItem": "[FR] 応募 当日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "注文保存,口座に紐付",
+            "No": 18,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:FR;注文種別:応募;注文日:翌営業日;会社:先日付受付可",
+            "TextItem": "[FR] 応募 翌営業日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 19,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:FR;注文種別:応募;注文日:当日;会社:先日付受付不可",
+            "TextItem": "[FR] 応募 当日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 20,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "High",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:FR;注文種別:応募;注文日:翌営業日;会社:先日付受付不可",
+            "TextItem": "[FR] 応募 翌営業日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14840表示,受付不可",
+            "No": 21,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "Medium",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:FR;注文種別:定時定額;注文日:当日;会社:先日付受付可",
+            "TextItem": "[FR] 定時定額 当日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "注文保存,口座に紐付",
+            "No": 22,
+            "Precondition": "会社:先日付受付可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "Medium",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:FR;注文種別:定時定額;注文日:翌営業日;会社:先日付受付可",
+            "TextItem": "[FR] 定時定額 翌営業日 (先日付受付可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 23,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 異常系",
+            "Priority": "Medium",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =当日",
+            "InputData": "チャネル:FR;注文種別:定時定額;注文日:当日;会社:先日付受付不可",
+            "TextItem": "[FR] 定時定額 当日 (先日付受付不可)"
+        },
+        {
+            "ExpectedResult": "メッセ14850表示,受付不可",
+            "No": 24,
+            "Precondition": "会社:先日付受付不可;口座:見込",
+            "Category": "結合テスト / 正常系",
+            "Priority": "Medium",
+            "Steps": "1. 開設申請(当日,見込)\\n2. =翌営業日",
+            "InputData": "チャネル:FR;注文種別:定時定額;注文日:翌営業日;会社:先日付受付不可",
+            "TextItem": "[FR] 定時定額 翌営業日 (先日付受付不可)"
+        }
+    ]
+}

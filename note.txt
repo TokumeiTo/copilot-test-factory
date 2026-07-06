@@ -19,4 +19,4 @@ If it hits 100%,
 
 GitHub Copilot does have a Free tier, but it is strictly limited to 2,000 code completions per month. For deep chat, file analysis, and running automation agents like you are doing right now, you need a paid tier. The paid tiers include:  Individual/Pro: $10/month.  Business/Enterprise: $19 to $39/user/month (which your company would provide for you).  The Mix-Up ExplainedYour team wants you to test the automation with Copilot, but the software window you have open right now on your screen is Cursor.Cursor is a completely different, competitor app. Because Cursor's interface looks almost identical to VS Code, it's easy to mistake them! When you hit Ctrl + I or type in that chat panel on your screen, you are burning through Cursor's free trial credits, not GitHub Copilot.
 
-NewKeyword: 非課税口座開設同日のNISA先日付注文をcheck
+NewKeyword: 非課税口座開設同日のNISA先日付注文チェック
