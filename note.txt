@@ -1,6 +1,11 @@
 pip install python-docx
+pip install python-pptx
+pip install xlrd
 pip install markitdown
 pip install "markitdown[all]"
+
+pip download -d packages python-docx python-pptx xlrd markitdown "markitdown[all]"
+pip install --no-index --find-links=packages python-docx python-pptx xlrd markitdown "markitdown[all]"
 
 
 Ran prompt -

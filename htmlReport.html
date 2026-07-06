@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Testing Automation Report Dashboard</title>
   <style>
-    /* Modern CSS Reset & Variable Setup */
+    /* Pure Enterprise Spreadsheet Layout */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -14,31 +14,29 @@
     }
 
     body {
-      background-color: #f8fafc;
-      color: #334155;
-      padding: 24px;
+      background-color: #ffffff;
+      color: #222222;
+      padding: 20px;
       line-height: 1.5;
     }
 
     .container {
-      max-width: 1200px;
+      width: 100%;
       margin: 0 auto;
     }
 
-    /* Header Panel */
+    /* Clean Header Panel */
     .header-card {
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      border: 1px solid #e2e8f0;
-      margin-bottom: 24px;
+      background: #f1f5f9;
+      padding: 16px;
+      border: 1px solid #cbd5e1;
+      margin-bottom: 16px;
     }
 
     .header-card h1 {
-      font-size: 24px;
+      font-size: 22px;
       color: #1e293b;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .header-card p {
@@ -48,26 +46,25 @@
 
     /* File Input Styling */
     .file-upload-wrapper {
-      margin-top: 16px;
+      margin-top: 12px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
 
     .btn-upload {
       display: inline-block;
-      padding: 10px 20px;
-      background-color: #2563eb;
-      color: white;
-      border-radius: 8px;
+      padding: 6px 14px;
+      background-color: #ffffff;
+      color: #1e293b;
+      border: 1px solid #94a3b8;
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 14px;
-      transition: background 0.2s;
     }
 
     .btn-upload:hover {
-      background-color: #1d4ed8;
+      background-color: #f1f5f9;
     }
 
     #file-input {
@@ -77,40 +74,27 @@
     #file-status {
       font-size: 14px;
       font-weight: 600;
-      color: #475569;
-      background: #f1f5f9;
-      padding: 4px 12px;
-      border-radius: 6px;
+      color: #334155;
+      padding: 4px 8px;
     }
 
-    /* Toolbar Filter Bar */
+    /* Operational Toolbar */
     .toolbar {
-      background: white;
-      padding: 16px;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      border: 1px solid #e2e8f0;
-      margin-bottom: 16px;
+      background: #f8fafc;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-bottom: none;
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
     }
 
     .search-input {
-      flex: 1;
-      min-width: 280px;
+      width: 350px;
       padding: 8px 12px;
       border: 1px solid #cbd5e1;
-      border-radius: 6px;
       font-size: 14px;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
     }
 
     .filter-group {
@@ -118,166 +102,127 @@
       align-items: center;
       gap: 8px;
       font-size: 14px;
-      color: #64748b;
+      font-weight: 600;
+      color: #475569;
     }
 
     .category-select {
-      padding: 8px 12px;
+      padding: 7px 12px;
       border: 1px solid #cbd5e1;
-      border-radius: 6px;
       background: white;
       font-size: 14px;
     }
 
-    /* Matrix Cards Layout */
-    .matrix-container {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    /* Enterprise Grid Table Container */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid #cbd5e1;
     }
 
-    .matrix-card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      border: 1px solid #e2e8f0;
-      overflow: hidden;
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 15px;
+      background-color: #ffffff;
     }
 
-    .card-header {
-      background: #f8fafc;
-      padding: 12px 24px;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .case-no {
-      font-weight: 700;
-      background: #e2e8f0;
-      color: #334155;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 13px;
-    }
-
-    /* Badges */
-    .badge {
-      font-size: 12px;
-      font-weight: 600;
-      padding: 2px 10px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-    }
-
-    .badge-normal { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
-    .badge-abnormal { background: #fff7ed; color: #9a3412; border-color: #ffedd5; }
-    .badge-high { background: #fef2f2; color: #991b1b; border-color: #fee2e2; }
-    .badge-medium { background: #fefce8; color: #854d0e; border-color: #fef08a; }
-
-    /* Main Grid Structure */
-    .card-body {
-      padding: 24px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    @media (min-width: 768px) {
-      .card-body {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .column-section {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .right-section {
-      background: #fdfdfd;
-      padding: 16px;
-      border-radius: 8px;
-      border: 1px dashed #cbd5e1;
-    }
-
-    .field-title {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #94a3b8;
-      margin-bottom: 4px;
-    }
-
-    .scenario-text {
-      font-size: 16px;
-      font-weight: 600;
+    /* Fixed Top Header Rows Layout */
+    .matrix-table th {
+      background: #cbd5e1;
       color: #1e293b;
+      font-weight: bold;
+      padding: 12px 10px;
+      border: 1px solid #cbd5e1;
+      white-space: nowrap;
+      font-size: 14px;
     }
 
-    .precondition-box {
-      background: #f8fafc;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #f1f5f9;
-      font-size: 13px;
-      color: #475569;
-    }
-
-    .data-box {
-      background: #0f172a;
-      color: #cbd5e1;
-      padding: 10px;
-      border-radius: 6px;
-      font-family: monospace;
-      font-size: 12px;
+    /* Crisp Grid Cell Styling */
+    .matrix-table td {
+      padding: 14px 12px;
+      border: 1px solid #cbd5e1;
+      vertical-align: top;
       word-break: break-all;
     }
 
-    .steps-box {
-      background: white;
-      padding: 12px;
-      border-radius: 6px;
-      border: 1px solid #e2e8f0;
+    /* Grid Row Alternating Colors */
+    .matrix-table tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    .matrix-table tr:hover td {
+      background-color: #f1f5f9;
+    }
+
+    /* Column Width Allocations */
+    .col-no { width: 60px; text-align: center; }
+    .col-scenario { width: 300px; }
+    .col-precondition { width: 200px; }
+    .col-data { width: 260px; }
+    .col-steps { width: 260px; }
+    .col-expected { width: 260px; }
+    .col-category { width: 160px; text-align: center; }
+    .col-priority { width: 120px; text-align: center; }
+
+    .case-no {
+      font-weight: bold;
+      color: #111111;
+      text-align: center;
+      display: block;
+      font-size: 16px;
+    }
+
+    /* Clean Enterprise Labels */
+    .cell-label {
       font-size: 13px;
-      color: #334155;
+      font-weight: bold;
+      padding: 6px 10px;
+      border: 1px solid #bbf7d0;
+      display: inline-block;
+      text-align: center;
+      width: 95%;
+    }
+
+    .label-normal { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+    .label-abnormal { background: #fff7ed; color: #9a3412; border-color: #ffedd5; }
+    .label-high { background: #fef2f2; color: #991b1b; border-color: #fee2e2; }
+    .label-medium { background: #fefce8; color: #854d0e; border-color: #fef08a; }
+
+    .scenario-text {
+      font-weight: bold;
+      color: #000000;
+    }
+
+    .text-container {
       white-space: pre-line;
+      color: #111111;
+    }
+
+    /* Plain style input text block with dashed border */
+    .data-box {
+      font-size: 14px;
+      white-space: pre-line;
+      background: #ffffff;
+      padding: 8px;
+      border: 1px dashed #94a3b8;
+      color: #111111;
     }
 
     .expected-box {
-      background: #f0fdf4;
-      padding: 12px;
-      border-radius: 6px;
-      border: 1px solid #dcfce7;
-      font-size: 13px;
-      color: #166534;
-      font-weight: 500;
+      font-weight: bold;
+      color: #000000;
       white-space: pre-line;
     }
 
     /* Empty Upload Layout */
     .empty-state {
       background: white;
-      border: 2px dashed #cbd5e1;
-      border-radius: 16px;
-      padding: 60px;
+      border: 1px dashed #cbd5e1;
+      padding: 40px;
       text-align: center;
-      color: #94a3b8;
-    }
-
-    .empty-state-icon {
-      font-size: 48px;
-      margin-bottom: 12px;
+      color: #64748b;
     }
   </style>
 </head>
@@ -307,30 +252,42 @@
         </div>
       </div>
 
-      <div id="matrix-output" class="matrix-container"></div>
+      <div class="table-container">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th class="col-no">No.</th>
+              <th class="col-scenario">テスト対象 / シナリオ概要</th>
+              <th class="col-precondition">前提条件</th>
+              <th class="col-data">入力データ</th>
+              <th class="col-steps">テスト手順</th>
+              <th class="col-expected">期待される動作・出力結果</th>
+              <th class="col-category">カテゴリ</th>
+              <th class="col-priority">優先度</th>
+            </tr>
+          </thead>
+          <tbody id="matrix-tbody"></tbody>
+        </table>
+      </div>
     </div>
 
     <div id="empty-view" class="empty-state">
-      <div class="empty-state-icon">📋</div>
       <h3>No execution file loaded yet</h3>
       <p style="font-size: 13px; margin-top: 4px;">Click the upload button above to choose your parsed JSON array.</p>
     </div>
   </div>
 
   <script>
-    // State storage variables
     let rawTestCases = [];
 
-    // Selectors
     const fileInput = document.getElementById('file-input');
     const fileStatus = document.getElementById('file-status');
     const dashboardControls = document.getElementById('dashboard-controls');
     const emptyView = document.getElementById('empty-view');
-    const matrixOutput = document.getElementById('matrix-output');
+    const matrixTbody = document.getElementById('matrix-tbody');
     const searchBar = document.getElementById('search-bar');
     const categoryFilter = document.getElementById('category-filter');
 
-    // Handle File Upload Reader pipeline
     fileInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (!file) return;
@@ -359,7 +316,6 @@
       reader.readAsText(file);
     });
 
-    // Populate Category Filtering choices dynamically
     function setupCategoryDropdown() {
       const categories = ['All', ...new Set(rawTestCases.map(item => item.Category))];
       categoryFilter.innerHTML = '';
@@ -371,12 +327,23 @@
       });
     }
 
-    // Grid Matrix Rendering logic engine
+    // Helper to cleanly escape text and handle raw literal '\n' or '\\n' string tokens
+    function formatNewlines(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+        .replace(/\\n/g, '\n'); // Replaces string representation with true newline token
+    }
+
     function renderMatrix() {
       const query = searchBar.value.toLowerCase();
       const selectedCategory = categoryFilter.value;
 
-      matrixOutput.innerHTML = '';
+      matrixTbody.innerHTML = '';
 
       const filteredItems = rawTestCases.filter(item => {
         const matchSearch = item.TextItem.toLowerCase().includes(query) || 
@@ -387,7 +354,7 @@
       });
 
       if (filteredItems.length === 0) {
-        matrixOutput.innerHTML = `<div style="text-align:center; padding: 40px; color:#94a3b8; background:white; border-radius:12px; border: 1px solid #e2e8f0;">No matching items found.</div>`;
+        matrixTbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 30px; color:#64748b;">No matching items found.</td></tr>`;
         return;
       }
 
@@ -395,51 +362,24 @@
         const isAbnormal = item.Category.includes('異常系');
         const isHigh = item.Priority === 'High';
 
-        const categoryClass = isAbnormal ? 'badge-abnormal' : 'badge-normal';
-        const priorityClass = isHigh ? 'badge-high' : 'badge-medium';
+        const categoryClass = isAbnormal ? 'label-abnormal' : 'label-normal';
+        const priorityClass = isHigh ? 'label-high' : 'label-medium';
 
-        const cardElement = document.createElement('div');
-        cardElement.className = 'matrix-card';
-        cardElement.innerHTML = `
-          <div class="card-header">
-            <div class="header-left">
-              <span class="case-no">No. ${item.No}</span>
-              <span class="badge ${categoryClass}">${item.Category}</span>
-            </div>
-            <span class="badge ${priorityClass}">${item.Priority} Priority</span>
-          </div>
-          <div class="card-body">
-            <div class="column-section">
-              <div>
-                <div class="field-title">Test Item / Scenario</div>
-                <div class="scenario-text">${item.TextItem}</div>
-              </div>
-              <div>
-                <div class="field-title">Preconditions</div>
-                <div class="precondition-box">${item.Precondition}</div>
-              </div>
-              <div>
-                <div class="field-title">Input Test Data</div>
-                <div class="data-box">${item.InputData}</div>
-              </div>
-            </div>
-            <div class="column-section right-section">
-              <div>
-                <div class="field-title" style="color: #64748b;">Steps to Reproduce</div>
-                <div class="steps-box">${item.Steps}</div>
-              </div>
-              <div>
-                <div class="field-title" style="color: #166534;">Expected Operational Result</div>
-                <div class="expected-box">${item.ExpectedResult}</div>
-              </div>
-            </div>
-          </div>
+        const rowElement = document.createElement('tr');
+        rowElement.innerHTML = `
+          <td style="text-align: center;"><span class="case-no">${item.No}</span></td>
+          <td><div class="scenario-text">${formatNewlines(item.TextItem)}</div></td>
+          <td><div class="text-container">${formatNewlines(item.Precondition)}</div></td>
+          <td><div class="data-box">${formatNewlines(item.InputData)}</div></td>
+          <td><div class="text-container">${formatNewlines(item.Steps)}</div></td>
+          <td><div class="expected-box">${formatNewlines(item.ExpectedResult)}</div></td>
+          <td style="text-align: center;"><span class="cell-label ${categoryClass}">${item.Category}</span></td>
+          <td style="text-align: center;"><span class="cell-label ${priorityClass}">${item.Priority}</span></td>
         `;
-        matrixOutput.appendChild(cardElement);
+        matrixTbody.appendChild(rowElement);
       });
     }
 
-    // Listener inputs for live tracking
     searchBar.addEventListener('input', renderMatrix);
     categoryFilter.addEventListener('change', renderMatrix);
   </script>
