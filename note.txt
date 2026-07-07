@@ -4,8 +4,7 @@ pip install xlrd
 pip install markitdown
 pip install "markitdown[all]"
 
-pip download -d packages python-docx python-pptx xlrd markitdown "markitdown[all]"
-pip download --only-binary=:all: --platform win_amd64 --python-version 3.12 -d packages lxml
+pip download --only-binary=:all: --platform win_amd64 --python-version 3.12 -d packages python-docx python-pptx xlrd markitdown "markitdown[all]"pip download --only-binary=:all: --platform win_amd64 --python-version 3.12 -d packages lxml
 pip install --no-index --find-links=packages python-docx python-pptx xlrd markitdown "markitdown[all]"
 
 
